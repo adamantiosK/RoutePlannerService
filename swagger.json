@@ -1,0 +1,279 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "Your API Title",
+      "version": "1.0.0",
+      "description": "API Documentation"
+    },
+    "servers": [
+      {
+        "url": "http://localhost:3000"
+      }
+    ],
+    "paths": {
+        "/directions": {
+            "get": {
+              "summary": "Get directions from typed address",
+              "description": "Retrieve directions between two typed addresses using the specified mode of transportation.",
+              "parameters": [
+                {
+                  "name": "origin",
+                  "in": "query",
+                  "required": true,
+                  "description": "Origin address",
+                  "schema": {
+                    "type": "string",
+                    "example": "Copenhagen"
+                  }
+                },
+                {
+                  "name": "destination",
+                  "in": "query",
+                  "required": true,
+                  "description": "Destination address",
+                  "schema": {
+                    "type": "string",
+                    "example": "Prague"
+                  }
+                },
+                {
+                  "name": "mode",
+                  "in": "query",
+                  "required": false,
+                  "description": "Mode of transportation (e.g., driving, walking, transit)",
+                  "schema": {
+                    "type": "string",
+                    "example": "transit"
+                  }
+                }
+              ],
+              "responses": {
+                "200": {
+                  "description": "A successful response",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "type": "object",
+                        "properties": {
+                          "start_address": {
+                            "type": "string",
+                            "example": "1st street Washington"
+                          },
+                          "end_address": {
+                            "type": "string",
+                            "example": "2nd street Los Angeles"
+                          },
+                          "duration": {
+                            "type": "string",
+                            "example": "5 mins"
+                          },
+                          "distance": {
+                            "type": "string",
+                            "example": "5 mins"
+                          },
+                          "steps": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "travel_mode": {
+                                  "type": "string",
+                                  "example": "WALKING"
+                                },
+                                "instructions": {
+                                  "type": "string",
+                                  "example": "Walk to Los Angeles"
+                                },
+                                "duration": {
+                                  "type": "string",
+                                  "example": "5 mins"
+                                },
+                                "distance": {
+                                  "type": "string",
+                                  "example": "0.4 km"
+                                }
+                              }
+                            }
+                          },
+                          "departure_time": {
+                            "type": "string",
+                            "example": "9:20 AM"
+                          },
+                          "arrival_time": {
+                            "type": "string",
+                            "example": "9:25 AM"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "400": {
+                  "description": "Invalid parameters",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "type": "object",
+                        "properties": {
+                          "error": {
+                            "type": "string",
+                            "example": "Missing required query parameters: origin, destination, mode"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "500": {
+                  "description": "Internal server error",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "type": "object",
+                        "properties": {
+                          "error": {
+                            "type": "string",
+                            "example": "Failed to get directions"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+      "/directions-from-coordinates": {
+      "get": {
+        "summary": "Get directions from coordinates",
+        "description": "Retrieve directions between two coordinates using the specified mode of transportation.",
+        "parameters": [
+          {
+            "name": "origin",
+            "in": "query",
+            "required": true,
+            "description": "Origin coordinates (latitude,longitude)",
+            "schema": {
+              "type": "string",
+              "example": "50.10755423752913,14.524440395517416"
+            }
+          },
+          {
+            "name": "destination",
+            "in": "query",
+            "required": true,
+            "description": "Destination coordinates (latitude,longitude)",
+            "schema": {
+              "type": "string",
+              "example": "50.10401837564898,14.466099035346284"
+            }
+          },
+          {
+            "name": "mode",
+            "in": "query",
+            "required": false,
+            "description": "Mode of transportation (e.g., driving, walking, transit)",
+            "schema": {
+              "type": "string",
+              "example": "transit"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "start_address": {
+                      "type": "string",
+                      "example": "1st street Washington"
+                    },
+                    "end_address": {
+                      "type": "string",
+                      "example": "2nd street Los Angeles"
+                    },
+                    "duration": {
+                      "type": "string",
+                      "example": "5 mins"
+                    },
+                    "distance": {
+                      "type": "string",
+                      "example": "5 mins"
+                    },
+                    "steps": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "travel_mode": {
+                            "type": "string",
+                            "example": "WALKING"
+                          },
+                          "instructions": {
+                            "type": "string",
+                            "example": "Walk to Los Angeles"
+                          },
+                          "duration": {
+                            "type": "string",
+                            "example": "5 mins"
+                          },
+                          "distance": {
+                            "type": "string",
+                            "example": "0.4 km"
+                          }
+                        }
+                      }
+                    },
+                    "departure_time": {
+                      "type": "string",
+                      "example": "9:20 AM"
+                    },
+                    "arrival_time": {
+                      "type": "string",
+                      "example": "9:25 AM"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "Missing required query parameters: origin, destination, mode"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "Failed to get directions"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

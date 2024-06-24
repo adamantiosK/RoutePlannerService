@@ -1,7 +1,7 @@
 const axios = require('axios');
 const { googleMapsApiKey } = require('../config/config');
 
-const getDirections = async (origin, destination, mode = 'driving', departureTime = 'now') => {
+const getDirections = async (origin, destination, mode = 'transit', departureTime = 'now') => {
     try {
         const response = await axios.get('https://maps.googleapis.com/maps/api/directions/json', {
             params: {

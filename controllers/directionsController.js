@@ -10,7 +10,6 @@ const fetchDirections = async (req, res) => {
 
     try {
         const directions = await getDirections(origin, destination, mode, departureTime);
-
         res.json(formatDirectionsResponse(directions));
     } catch (error) {
         console.error(error);
@@ -18,8 +17,6 @@ const fetchDirections = async (req, res) => {
     }
 };
 
-//  http://localhost:3000/directions-from-coordinates?originLat=50.10755423752913&originLng=14.524440395517416&destinationLat=50.10401837564898&destinationLng=14.466099035346284
-//  http://localhost:3000/directions-from-coordinates?origin=50.10755423752913,14.524440395517416&destination=50.10401837564898,14.466099035346284&mode=transit
 const fetchDirectionsFromCoordinates = async (req, res) => {
     // const { originLat, originLng, destinationLat, destinationLng } = req.query;
     const { origin, destination, mode, departureTime } = req.query;
